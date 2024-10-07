@@ -5,7 +5,7 @@ import { AuthContext } from "../../authProviders/AuthProvider";
 function Register() {
     const [registerError, setRegisterError] = useState('');
     const navigate = useNavigate();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, } = useContext(AuthContext);
 
     const handelRegister = e => {
         e.preventDefault()

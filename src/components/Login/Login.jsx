@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../authProviders/AuthProvider";
 
 function Login() {
-    const [loginError,setLoginError] = useState('');
+    const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
-    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+    const { signInUser, signInGoogle } = useContext(AuthContext);
 
     const handelLogin = e => {
         e.preventDefault()
@@ -18,22 +18,22 @@ function Login() {
             .then(result => {
                 e.target.reset()
                 navigate("/")
-        console.log(result)
+                console.log(result)
             })
             .catch(error => {
                 setLoginError(error.message)
-            console.log(error.message)
+                console.log(error.message)
             })
     }
     const handelGoogleSignIn = () => {
-        signInWithGoogle()
+        signInGoogle()
             .then(result => {
             console.log(result.user)
             })
             .catch(error => {
-            console.log(error.message)
+                setLoginError(error.message)
+            console.error(error)
         })
-            
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -74,7 +74,7 @@ function Login() {
                         <div
                             onClick={handelGoogleSignIn}
                             className="py-3 flex btn btn-ghost justify-center text-xl">
-                            <FcGoogle/>
+                            <FcGoogle />
                         </div>
                         <span>Already have account? <Link to="/register" className="link link-info">please register</Link></span>
                         {
